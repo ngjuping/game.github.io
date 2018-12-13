@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+*{
+    user-select:none;
+}
+body{
+    text-align:center;
+    margin: 0px;
+    padding:3%;
+    background-color:black;
+}
+#gameContainer
+{
+    position:relative;
+    width:1800px;
+    height:900px;
+    display:inline-block; 
+    left:5%;
+}
+
+canvas {
+    border:1px solid #d3d3d3;
+    background-color: #f1f1f1;
+    position:relative;
+    /*background-size:100% 100%;*/
+    z-index:0;
+    background-repeat:no-repeat;
+}
+/*menu section*/
+#menu
+{
+    position:absolute;
+    display:block;
+    background:url("../src/background/menuPic.jpg");
+    top:0px;
+    left:0px;
+    width:100%;
+    height:100%;
+    background-size:100% 100%;
+    background-repeat:no-repeat;
+    z-index:2;
+    text-align:center;
+    padding:1%;
+    
+}
+
+#menu::after{
+    content:"";
+    position:absolute;
+    top:0px;
+    left:0px;
+    width:100%;
+    height:100%;
+    background:url("../src/background/menuPic.jpg");
+    background-size:100% 100%;
+    background-repeat:no-repeat;
+    box-shadow: 0 0 16px 16px black inset;
+    z-index:-1;
+    border-radius:3%;
+}
+
+#startBtn
+{
+    width:30%;
+    height:15%;
+    border:3px solid black;
+    border-radius:5%;
+    position:absolute;
+    background-color:white;
+    color:black;
+    left:35%;
+    top:50%;
+    padding-top:3%;
+    font-size:80px;
+    transition: background-color 1s,
+    color 0.3s,
+    transform 0.2s;
+}
+#startBtn:active{
+    transform:scale(0.9);
+}
+#startBtn:hover{
+    background:url("../src/buttons/startBtn.jpg");
+    background-color:black;
+    background-position-x: -50px;
+    cursor:pointer;
+    color:white;
+}
+
+#helpBtn2
+{
+    width:30%;
+    height:15%;
+    border:3px solid black;
+    border-radius:5%;
+    background-color:white;
+    position:absolute;
+    left:35%;
+    top:75%;
+    padding-top:3%;
+    font-size:80px;
+    transition: background-color 1s,
+    color 0.3s;
+}
+
+#helpbtn2:active{
+    transform:scale(0.9);
+}
+#helpBtn2:hover{
+    background:url("../src/buttons/helpBtn.jpg");
+    background-color:black;
+    cursor:pointer;
+    color:white;
+    background-position-y: -20px;
+}
+
+#closeBtn
+{
+    position:absolute;
+    width:100px;
+    height:50px;
+    right:0px;
+    top:10px;
+    background-color:white;
+    z-index:2;
+    border-radius:15px;
+    font-size:30px;
+    color:red;
+    transition:background-color 0.5s,
+    color 0.2s;
+    padding-top:1%;
+}
+#closeBtn:hover{
+    background-color:black;
+    color:white;
+    cursor:pointer;
+
+}
+#musicBtn
+{
+    width:80px;
+    height:80px;
+    position:absolute;
+    right:50%;
+    top:10px;
+    background-color:white;
+    border-radius:50%;
+    z-index:1;
+    font-size:2em;
+    padding:1%;
+    background-color:darkred;
+    text-align:center;
+    background-image:url("../src/unmute.jpg");
+    background-size:100% 100%;
+    transition:transform 0.5s,
+    background-color 0.5s;
+}
+
+#musicBtn:hover{
+    background-color:white;
+    transform:scale(1.5);
+    cursor:pointer;
+}
+#btnContainer
+{
+    position:absolute;
+    top:0px;
+    right:0px;
+    border:2px solid black;
+    width:20%;
+    height:12%;
+}
+#btnContainer::after
+{
+    content:"";
+    background-color:white;
+    opacity:0.35;
+    top:0px;
+    left:0px;
+    width:100%;
+    height:100%;
+    display:block;
+}
+
+#homeBtn
+{
+    width:80px;
+    height:80px;
+    position:absolute;
+    right:25%;
+    top:10px;
+    background-color:white;
+    border-radius:50%;
+    z-index:1;
+    font-size:2em;
+    padding:1%;
+    background-color:darkred;
+    text-align:center;
+    background-image:url("../src/home.png");
+    background-size:100% 100%;
+    transition:transform 0.5s,
+    background-color 0.5s; 
+}
+
+#homeBtn:hover{
+    background-color:white;
+    transform:scale(1.5);
+    cursor:pointer;
+}
+
+#pauseBtn{
+    width:80px;
+    height:80px;
+    position:absolute;
+    right:0%;
+    top:10px;
+    background-color:white;
+    border-radius:50%;
+    z-index:1;
+    padding:1%;
+    background-color:darkred;
+    text-align:center;
+    background-image:url("../src/resumed.png");
+    background-size:100% 100%;
+    transition:transform 0.5s,
+    background-color 0.5s;
+}
+
+#pauseBtn:hover{
+    background-color:white;
+    transform:scale(1.5);
+    cursor:pointer;
+}
+
+#helpBtn{
+    width:80px;
+    height:80px;
+    position:absolute;
+    right:75%;
+    top:10px;
+    background-color:white;
+    border-radius:50%;
+    z-index:1;
+    font-size:5em;
+    padding:1%;
+    background-color:darkred;
+    text-align:center;
+    background-image:url("../src/help.png");
+    background-size:100% 100%;
+    transition:transform 0.5s,
+    background-color 0.5s;
+}
+
+#helpBtn:hover{
+    background-color:white;
+    transform:scale(1.5);
+    cursor:pointer;
+}
+
+p{
+    margin:0px;
+}
+
+img 
+{
+    display:inline-block;
+    max-width:50%;
+}
+
+.dialogues
+{
+    font-size:40px;
+    color:white;
+    text-align:center;
+}
+
+.dialogues_container
+{
+    display:inline-block;
+    border: 4px solid black;
+    opacity:0.9;
+    width:80%;
+    height:100px;
+    position:relative;
+    padding:1%;
+}
+
+
+.dialogues_container::after{
+    content:"";
+    top:0px;
+    left:0px;
+    width:100%;
+    height:100%;
+    background-color:black;
+    opacity:0.7;
+    position:absolute;
+    z-index:-1;
+    filter:blur(3px);
+}
+
+#tips_container
+{
+    position:absolute;
+    left:35%;
+    top:30%;
+    width:30%;
+    padding:1%;
+    font-size:3em;
+    text-align:center;
+    border:5px solid black;
+    border-radius:3%;
+    z-index:2;
+}
+
+#tips_container::after
+{
+    content:"";
+    position:absolute;
+    top:0px;
+    left:0px;
+    width:100%;
+    height:100%;
+    z-index:-1;
+    opacity:0.7;
+    background-color:white;
+}
+
+canvas{
+    background:url('../src/background/background5.jpg');
+    background-position: 0% 50%;
+    background-size:120% 120%;
+}
+#deaths
+{
+    position:absolute;
+    bottom:0px;
+    left:0px;
+    color:white;
+    z-index:1;
+    font-size:40px;
+}
+#lifeCount
+{
+    color:darkorange;
+    background-color:white;
+    border-radius:10px;
+}
+
+
+#musicPlayer{
+    visibility: hidden;
+}
+#helpPanel
+{
+    position:absolute;
+    left:10%;
+    top:10%;
+    width:80%;
+    padding:2%;
+    font-size:40px;
+    text-align:center;
+    border:5px solid white;
+    border-radius:2%;
+    z-index:2;
+    color:white;
+    transition:background-color 0.5s;
+}
+
+#helpPanel::after
+{
+    content:"";
+    position:absolute;
+    top:0px;
+    left:0px;
+    width:100%;
+    height:100%;
+    z-index:-1;
+    opacity:0.8;
+    background-color:darkslategray;
+    border-width:5px;
+}
+
+#helpPanel:hover
+{
+    background-color:black;
+}
+
+#helpPanel>p{
+    padding:20px;
+    transition:font-size 0.3s;
+}
+
+#helpPanel>p:hover{
+    cursor:pointer;
+    text-shadow: 5px 5px grey;
+}
+#helpPanel>p:active{
+    font-size:70px;
+}
+
+#score
+{
+    position:absolute;
+    left:10%;
+    top:10%;
+    width:80%;
+    padding:1%;
+    font-size:2em;
+    text-align:center;
+    border:5px solid black;
+    border-radius:3%;
+    z-index:2;
+    color:white;
+    transition:opacity 0.5s,
+    transform 0.2s;
+}
+
+#score::after
+{
+    content:"";
+    position:absolute;
+    top:0px;
+    left:0px;
+    width:100%;
+    height:100%;
+    z-index:-1;
+    opacity:0.8;
+    background-color:darkgrey;
+    border-width:5px;
+}
+
+#score:hover
+{
+    transform:scale(1.05);
+}
+
+#score:hover::after
+{
+    opacity:1;
+}
+.hidden
+{
+    display:none;
+}
+
+</style>
+        <script src="../src/script.js"></script>
+</head>
+
+<body>
+    
+   <div id="gameContainer">
+        <canvas id="game">
+        </canvas>
+        <div id="deaths">
+
+        </div>
+        <div id="score" class="hidden">
+
+        </div>
+        <div id="btnContainer">
+            <div id="homeBtn">
+
+            </div>
+            <div id="pauseBtn">
+            
+            </div>
+            <div id="musicBtn">
+
+            </div>
+            <div id="helpBtn">
+            
+            </div>
+        </div>
+        <div id="menu">
+                <img id="title" src="../src/title.png">
+                <div id="startBtn">Start!</div>
+                <div id="helpBtn2">How to play?</div>
+                
+        </div>
+        <div class="hidden" id="helpPanel">
+            <div id="closeBtn">Close</div>
+            <h3><b>Quick Guide</b></h3>
+            <p>Anytime in game, press <i>ESC</i> to pause the game.</p>
+            <p>Move with ← → ↑ ↓ on your keyboard</p>
+            <p>You may blink by pressing 'Space' whenever the cursor in front is present. </p>
+            <p>You can move the platforms, even the one you are standing on!</p>
+            <p>Bullets can burn ordinary platforms, but not steel and icy ones.</p>
+            <h3>You have only <span id="lifeCount">TEN</span> lives!</h3>
+            <p>Find objectives! There are <i>TWO</i> objectives in this game.</p>
+            <p>Be careful of the hidden LOWER boundary! </p>
+        </div>
+        <div class="dialogues_container">
+            <div class="dialogues hidden" >
+                <p>Welcome adventurer! You are here to become the savior of the world....</p>
+            </div>
+            <div class="dialogues hidden" >
+                <p>Earth has been conquered by invaders that had been hiding for centuries in the sun....</p>
+            </div>
+            <div class="dialogues hidden" >
+                <p>Your mission is to bring the humanity the key of the spaceship. </p>
+            </div>
+            <div class="dialogues hidden" >
+                <p>Escape is the only way to go now.....</p>
+            </div>
+            <div class="dialogues hidden" >
+                <p>Your name is MashiII, an AI that has no offensive abilities at all.</p>
+                </div>
+            <div class="dialogues hidden" >
+                <p>But you can move with arrow keys... Even double jump!</p>
+            </div>
+            <div class="dialogues hidden" >
+                <p>Do you see that cursor in front of you? That indicates your next blink decision, when you hit 'Space'</p>
+            </div>
+            <div class="dialogues hidden" >
+                <p>Take note that blink has a cooldown of two seconds.. Use it wisely.</p>
+            </div>
+            <div class="dialogues hidden" >
+                <p>Let's move.. people are waiting. Just make sure you don't die more than 10 times!</p>
+            </div>
+            <div class="dialogues hidden" >
+            <p>
+                Look out!!!
+            </p>
+            </div>
+            <div class="dialogues hidden" >
+                <p>You can move platforms when they are out of position.</p>
+            </div>
+            <div class="dialogues hidden" >
+                <p>Be awared of the lower boundary! </p>
+            </div>
+            <div class="dialogues hidden" >
+                <p>The meteors will make normal platforms fragile.</p>
+            </div>
+            <div class="dialogues hidden" >
+                <p>Incoming!</p>
+            </div>
+            <div class="dialogues hidden" >
+                <p>You are the humanity's last hope!</p>
+            </div>
+            <div class="dialogues hidden" >
+                <p>Let's head forward. We need to get to the spaceship! </p>
+            </div>
+            <div class="dialogues hidden">
+                <p>More enemies are lurking in the darkness....</p>
+            </div>
+            <div class="dialogues hidden">
+                <p>It's time to escape!!</p>
+            </div>
+        </div>
+        <div id="tips_container" class="hidden">
+            <div class="tips hidden">
+                <p>You can move the obstacles by constantly jump down and push it!</p>
+            </div>
+            <div class="tips hidden">
+                <p>Blink has a cooldown of 2 seconds... Use it wisely.</p>
+            </div>
+            <div class="tips hidden">
+                <p>Minions will patrol on the same platform.. Don't worry.</p>
+            </div>
+            <div class="tips hidden">
+                <p>Beware of the random meteor bombardments.. the bullets they fire can destroy both you and the platforms.</p>
+            </div>
+        </div>
+    </div>
+    <audio controls autoplay id="musicPlayer">
+        <source src="../src/bgm2.mp3" type="audio/mpeg">
+    </audio>
+    
+    
+
+</body>
+
+</html>
